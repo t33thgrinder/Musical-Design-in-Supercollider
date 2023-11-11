@@ -1,4 +1,4 @@
-( 
+(
 Spec.add(\freq, \widefreq);
 Spec.add(\mInd, [0.0,10]);
 Spec.add(\amp_0, [0.0,1]);
@@ -25,27 +25,27 @@ Spec.add(\wdt_4, \freq);
 Ndef(\fm_1mNc).clear;
 Ndef(\fm_1mNc).gui;
 
-( 
+(
 Spec.add(\fmnt_0, [0,5]);
 Spec.add(\fmnt_1, [0,5]);
 Spec.add(\mfreq, \freq);
 Spec.add(\cfreq, \freq);
 Spec.add(\stretch, [1,10, \lin, 1, 1]);
 
-Ndef(\fm_1mNc,{ 
+Ndef(\fm_1mNc,{
 	var fr_0,  mfr, cfr, mod, fm;
 	e = EnvGen.ar(Env.perc(0.01,3), gate: Impulse.ar(0.4));
-	
+
 	cfr	= \cfreq.kr(100);
 	mfr = \mfreq.kr(0); // freq step
-	
+
 	mod = SinOsc.ar(mfr * \stretch.kr(3));
 
 	fr_0 = cfr + ( mod * ( \wdt_0.kr(50) ) );
 
 
 	fm = SinOsc.ar(fr_0) * \amp_0.kr(0.2) !2;
-	fm = SinOsc.ar(mfr) * 0.5 + fm;	
+	fm = SinOsc.ar(mfr) * 0.5 + fm;
 	fm =  fm * e.pow(0.9);
 
 	// HPF.ar( fm  * 0.07, mfr * 0.5 );
@@ -56,13 +56,13 @@ Ndef(\fm_1mNc,{
 
 ( // mod freq as fundamental
 
-Ndef(\fm_1mNc,{ 
+Ndef(\fm_1mNc,{
 	var fr_0, fr_1, fr_2, mfr, mod, fm;
 	e = EnvGen.ar(Env.perc(0.01,3), gate: Impulse.ar(0.4));
-	
+
 	mfr		= \freq.kr(100);
 	// mfr	= LFNoise0.kr(1).exprange(50,333);
-	
+
 	mod = SinOsc.ar(mfr *\stretch.kr(3));
 
 	fr_0 = mfr*\fmnt_0.kr(1) + ( mod * ( \wdt_0.kr(50) ) );
@@ -86,8 +86,8 @@ Ndef(\fm_1mNc,{
 
 Ndef(\fm_1mNc).clear;
 Ndef(\fm_1mNc).gui;
-( 
-Ndef(\fm_1mNc,{ 
+(
+Ndef(\fm_1mNc,{
 	var fr_0, fr_1, fr_2,fr_3,fr_4, mfr, mod, fm;
 	var f_rng = [50,1600];
 	var frek, amp, ring, klank;
@@ -97,11 +97,11 @@ Ndef(\fm_1mNc,{
 	mfr		= \freq.kr(111);
 	// mfr	= LFNoise0.kr(1).exprange(50,333);
 	mfr = mfr.clip(f_rng[0],f_rng[1]);
-	
+
 	mod = SinOsc.ar(
-		mfr * \stretch.kr(3),// + {Rand(-1,3)}.dup, 
+		mfr * \stretch.kr(3),// + {Rand(-1,3)}.dup,
 		// PinkNoise.ar(2pi * mfr.linlin(50,1600,0.8,0.2)!2).lag(0.06)
-	) * e.pow(1.3) 
+	) * e.pow(1.3)
 	// * LFTri.kr(e * 7).range(0.4,3)
 	;
 
@@ -138,7 +138,7 @@ Ndef(\fm_1mNc,{
 
 Ndef(\fm_1mNc).clear;
 (
-Ndef(\fm_1mNc,{ 
+Ndef(\fm_1mNc,{
 	var fr_0, fr_1, fr_2,fr_3,fr_4, mfr, mod, fm;
 	var f_rng = [50,1600];
 	var frek, amp, ring, klank;
@@ -147,11 +147,11 @@ Ndef(\fm_1mNc,{
 	mfr		= \freq.kr(111);
 	// mfr	= LFNoise0.kr(1).exprange(50,333);
 	mfr = mfr.clip(f_rng[0],f_rng[1]);
-	
+
 	mod = SinOsc.ar(
-		mfr * \stretch.kr(3) + {Rand(-1,3)}.dup, 
+		mfr * \stretch.kr(3) + {Rand(-1,3)}.dup,
 		// PinkNoise.ar(2pi * mfr.linlin(50,1600,0.8,0.2)!2).lag(0.06)
-	) * e.pow(1.3) 
+	) * e.pow(1.3)
 	// * LFTri.kr(e * 7).range(0.4,3)
 	;
 
@@ -178,7 +178,7 @@ Ndef(\fm_1mNc,{
 
 
 
-	
+
 	// freqs
 	frek = \frek.ir(Array.series(4, 120, 520).postln);
 	// amplitudes
@@ -186,8 +186,8 @@ Ndef(\fm_1mNc,{
 	// ring times
 	ring = \ring.ir([0.01, 0.01,0.11,0.01]*2);
 
-	klank = Klank.ar(`[frek, amp, ring], fm);	
-	// klank = Klank.ar(`[frek, amp, ring], WhiteNoise.ar(0.5!2));	
+	klank = Klank.ar(`[frek, amp, ring], fm);
+	// klank = Klank.ar(`[frek, amp, ring], WhiteNoise.ar(0.5!2));
 
 	fm = Mix([
 		// fm ,
@@ -202,7 +202,7 @@ Ndef(\fm_1mNc,{
 
 
 
-( 
+(
 SynthDef(\fm_1mNc,{ | gate=1 |
 	var fr_0, fr_1, fr_2,fr_3,fr_4, mfr, mod, fm;
 	var f_rng = [50,1600];
@@ -214,11 +214,11 @@ SynthDef(\fm_1mNc,{ | gate=1 |
 
 	mfr		= \freq.kr(111);
 	mfr = mfr.clip(f_rng[0],f_rng[1]);
-	
+
 	mod = SinOsc.ar(
-		mfr * \stretch.kr(3) + {Rand(-1,3)}.dup, 
+		mfr * \stretch.kr(3) + {Rand(-1,3)}.dup,
 		PinkNoise.ar(2pi * mfr.linlin(50,1600,0.1,1) !2)
-	) * e.pow(1.2) 
+	) * e.pow(1.2)
 	// * LFTri.kr(e * 7).range(0.4,3)
 	;
 
@@ -243,7 +243,7 @@ SynthDef(\fm_1mNc,{ | gate=1 |
 		SinOsc.ar(fr_4) * e.pow(mfr.linlin( f_rng[0], f_rng[1], 1, 3.5 )) * \amp_4.kr(0.2),
 	]);
 
-	
+
 	// freqs
 	frek = \frek.ir(Array.series(4, 100, 555).postln);
 	// amplitudes
@@ -251,7 +251,7 @@ SynthDef(\fm_1mNc,{ | gate=1 |
 	// ring times
 	ring = \ring.ir([0.05, 0.03,0.01,0.01]*2);
 
-	klank = Klank.ar(`[frek, amp, ring], fm);	
+	klank = Klank.ar(`[frek, amp, ring], fm);
 
 	fm = Mix([
 		fm ,
@@ -264,7 +264,7 @@ SynthDef(\fm_1mNc,{ | gate=1 |
 }).add
 )
 
-( 
+(
 Pbind(
 	\instrument, \fm_1mNc,
 	\dur, Pseq( 2.pow((-3..1).scramble), inf ),
@@ -272,6 +272,6 @@ Pbind(
 	\degree, Pseq([0,2,5,6,8,11].scramble, inf),
 	\octave, Pstutter(3, Pseq([3,4,5], inf) ),
 	\vel, Pstutter(6, Pseq([ 0.2, 1, 1.5 ], inf)),
-).play; 
+).play;
 )
 
